@@ -10,7 +10,7 @@ namespace SlidePuzzle
     {
         static void Main(string[] args)
         {
-            Board board = new Board(4, 4);
+            Board board = new Board(3, 3);
             board.SwapRandom(50);
             board.ShowBoard();
             while (!board.IsCorrect)
@@ -31,7 +31,8 @@ namespace SlidePuzzle
                         board.MakeMove(Direction.Down);
                         break;
                     case ConsoleKey.R:
-                        board.Reset(4, 4);
+                        board.Reset(3, 3);
+                        board.SwapRandom(1);
                         break;
                 }
                 Console.Clear();

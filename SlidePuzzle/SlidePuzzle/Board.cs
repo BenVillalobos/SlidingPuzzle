@@ -73,6 +73,7 @@ namespace SlidePuzzle
                     _board[row, col] = (Width * row + col) + 1;
                 }
             }
+            _emptySpot.Set(Width - 1, Height - 1);
         }
         
         private void SwapOnce(int r1, int c1, int r2, int c2)
@@ -104,7 +105,7 @@ namespace SlidePuzzle
             get
             {
                 int lastNum = int.MinValue;
-                //if the empty spot isn't at the bottom right corner, we automatically it isn't solved
+                //if the empty spot isn't at the bottom right corner, we automatically know it isn't solved
                 if(_emptySpot.Row != Width -1 || _emptySpot.Col != Height-1)
                 {
                     return false;
@@ -112,12 +113,9 @@ namespace SlidePuzzle
                 //count through each index. Must be in ascending order until the end
                 for (int row = 0; row < Height; row++)
                 {
-                    for (int col = 0; col < Width; col++)
+                                                     //bottom right corner check
+                    for (int col = 0; col < Width && !(row == Width - 1 && col == row); col++)
                     {
-                        if(row == Width - 1 && col == Height - 1)
-                        {
-                            break;
-                        }
                         if(_board[row, col] < lastNum)
                         {
                             return false;
@@ -167,7 +165,6 @@ namespace SlidePuzzle
                 case Direction.Down:
                     if(_emptySpot.Row == Height-1)
                     {
-                        //can't move
                         return;
                     }
                     SwapOnce(_emptySpot.Row, _emptySpot.Col, _emptySpot.Row + 1, _emptySpot.Col);
