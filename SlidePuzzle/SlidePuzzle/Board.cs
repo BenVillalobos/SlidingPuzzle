@@ -110,14 +110,23 @@ namespace SlidePuzzle
                 {
                     if(row == emptySpot.Row && col == emptySpot.Col)
                     {
-                        Console.Write("   ");
+                        Console.Write("|    ");
+                        if (col == Width - 1)
+                        {
+                            Console.Write("|");
+                        }
                         continue;
-                        
                     }
-                    Console.Write(_board[row, col].ToString("## "));
+
+                    Console.Write(string.Format("| {0} ", _board[row, col].ToString("##")));
+
                     if (_board[row, col] < 10)
                     {
                         Console.Write(" ");
+                    }
+                    if (col == Width - 1)
+                    {
+                        Console.Write("|");
                     }
                 }
                 Console.WriteLine();
